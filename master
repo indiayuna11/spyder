@@ -1,0 +1,32 @@
+import numpy as np
+import skfuzzy as fuzz
+import matplotlib.pyplot as plt
+
+x_kecepatan = np.arange(0,110,10)
+
+#fungsi keanggotaan fuzzy
+kecepatan_rendah = fuzz.trimf(x_kecepatan, [0,0,50])
+kecepatan_sedang = fuzz.trimf(x_kecepatan, [0,50,100])
+kecepatan_tinggi = fuzz.trimf(x_kecepatan, [50,100,100])
+
+#grafik fungsi keanggotaan masing-masing
+fig, ax=plt.subplots(figsize=(7,4))
+
+ax.plot(x_kecepatan, kecepatan_rendah, 'r',linewidth=1.5, label="kec rendah")
+ax.plot(x_kecepatan, kecepatan_sedang, 'b',linewidth=1.5, label="kec sedang")
+ax.plot(x_kecepatan, kecepatan_tinggi, 'g',linewidth=1.5, label="kec tinggi")
+ax.set_title("Kecepatan")
+
+#dekorasi
+ax.spines['top'].set_visible(false)
+ax.spines['right'].set_visible(false)
+ax.get_xaxis().tick_bottom()
+ax.get_yaxis().tick_left()
+ax.legend(loc=5)
+ax.grid(True,linestyle=':')
+ax.set_yticks(np.arange(0, 1.1, .1))
+ax.set_xticks(np.arange(0, 25.1, 1))
+ax.set_xlim(1, 25.1)
+ax.set_ylim(-0.05, 1.05)
+
+plt.tight_layout()
